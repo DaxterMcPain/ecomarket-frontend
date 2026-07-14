@@ -53,6 +53,41 @@ function Login() {
 
     };
 
+    const handleGuest = async () => {
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/guest`,
+                {
+                    method: "POST"
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message);
+                return;
+            }
+
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(data.user)
+            );
+
+            navigate("/");
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert("No se pudo conectar con el servidor.");
+
+        }
+
+    };
+
     return (
         <div className="auth-page">
             <Link to="/" className="brand-header">
@@ -107,6 +142,14 @@ function Login() {
                             Crear una cuenta nueva
                         </button>
                     </Link>
+
+                    <button
+                        type="button"
+                        className="btn btn-outline"
+                        onClick={handleGuest}
+                    >
+                        Continuar como invitado
+                    </button>
 
                     <Link to="/admin">
                         <button type="button" className="btn btn-muted">

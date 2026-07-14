@@ -7,7 +7,7 @@ function Catalog() {
     const navigate = useNavigate();
 
     const currentUser = JSON.parse(
-    localStorage.getItem("currentUser")
+        localStorage.getItem("currentUser")
     );
 
 
@@ -40,13 +40,17 @@ function Catalog() {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                body: JSON.stringify(product)
+                    body: JSON.stringify(product)
                 }
             );
 
             const data = await response.json();
 
             alert(data.message);
+
+            if (response.status === 401) {
+                navigate("/login");
+            }
 
         } catch (error) {
 
