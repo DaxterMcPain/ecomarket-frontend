@@ -1,4 +1,8 @@
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+
+export const API_URL = isLocalhost
+    ? "http://localhost:3000"
+    : "https://ecomarket-api-s3qc.onrender.com";
 
 export const CATEGORIES = ["Accesorios", "Hogar", "Higiene"];
 
